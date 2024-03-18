@@ -4,7 +4,6 @@ import AuthPageInput from "../../components/AuthPageInput/AuthPageInput";
 import RightTopButton from "../../components/RightTopButton/RightTopButton";
 import { useInput } from "../../hooks/useInput";
 import * as s from "./style";
-import React from 'react';
 import { signinRequest } from "../../apis/api/signin";
 
 function SigninPage(props) {

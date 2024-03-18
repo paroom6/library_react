@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 function RootSideMenuLeft(props) {
     const [show, setShow] = useRecoilState(menuState);
     const handleCloseMenuClick = () => {
-        setShow(false);
+        setShow(() => false);
     }
     return (
         <div css={s.layout(show)}>
