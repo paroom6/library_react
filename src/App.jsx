@@ -13,8 +13,6 @@ function App() {
     <>
       <RootLayout>
         <RootContainer>
-          <RootHeader />
-          <RootSideMenuLeft />
           <AuthRoute/>
         </RootContainer>
       </RootLayout>

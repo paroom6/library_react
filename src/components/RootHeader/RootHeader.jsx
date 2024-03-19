@@ -1,33 +1,62 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import {HiMenu} from "react-icons/hi";
 import * as s from "./style";
 import { useRecoilState } from 'recoil';
 import { menuState } from '../../atoms/menuAtoms';
 import { Link } from 'react-router-dom';
-import { FiUser } from "react-icons/fi";
-import { principalState } from '../../atoms/principalAtom';
+import { FiLogOut, FiUser } from "react-icons/fi";
+import { useQueryClient } from 'react-query';
+import instance from '../../apis/utils/instance';
 
 function RootHeader(props) {
     const [show, setShow] = useRecoilState(menuState);
-    const [ principal, setPrincipal ] = useRecoilState(principalState);
+    const [isLogin, setLogin] = useState(false);
+    const queryClient = useQueryClient();
+    // const principal = queryClient.getQueryData("principalQuery");
+    const principalState = queryClient.getQueryState("principalQuery");
     
-    const handleOpenMenuClick = () => {
+    useEffect(() => {
+        setLogin(() => principalState.status === "success");
+        console.log(principalState.status);
+    },[principalState.status])
+
+    const handleOpenMenuClick = (e) => {
+        e.stopPropagation();
         setShow(() => true);
+    }
+
+    const handleRefetch = () => {
+        queryClient.refetchQueries("principalQuery");
+    }
+
+    const handleLogoutClick = () => {
+        localStorage.removeItem("AccessToken");
+        instance.interceptors.request.use((config) => {
+            config.headers.Authorization = null;
+            return config;
+        });
+        queryClient.refetchQueries("principalQuery");
     }
     return (
         <div css={s.header}>
-            <button css={s.menuButton} onClick={() => handleOpenMenuClick()}>
+            <button css={s.menuButton} onClick={(e) => handleOpenMenuClick(e)}>
                 <HiMenu/>
             </button>
+            <button onClick={handleRefetch}>principal reload</button>
             {
-                !principal ? 
+                !isLogin ? 
                 <Link css={s.account} to={"/auth/signin"}>
                     <FiUser />
                 </Link>
-                : <Link css={s.account} to={"/account/mypage"}>
+                : <div css={s.accountItems}>
+                    <button css={s.logout} onClick={handleLogoutClick}>
+                        <FiLogOut />
+                    </button> 
+                <Link css={s.account} to={"/account/mypage"}>
                     <FiUser />
                 </Link>
+                </div> 
             }
             
         </div>
