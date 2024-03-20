@@ -26,9 +26,7 @@ function RootHeader(props) {
         setShow(() => true);
     }
 
-    const handleRefetch = () => {
-        queryClient.refetchQueries("principalQuery");
-    }
+   
 
     const handleLogoutClick = () => {
         localStorage.removeItem("AccessToken");
@@ -43,7 +41,6 @@ function RootHeader(props) {
             <button css={s.menuButton} onClick={(e) => handleOpenMenuClick(e)}>
                 <HiMenu/>
             </button>
-            <button onClick={handleRefetch}>principal reload</button>
             {
                 !isLogin ? 
                 <Link css={s.account} to={"/auth/signin"}>
