@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
+import * as s from "./style";
 import { Link } from "react-router-dom";
 import AuthPageInput from "../../components/AuthPageInput/AuthPageInput";
 import RightTopButton from "../../components/RightTopButton/RightTopButton";
 import { useInput } from "../../hooks/useInput";
-import * as s from "./style";
 import { signinRequest } from "../../apis/api/signin";
 
 function SigninPage(props) {
@@ -34,7 +34,7 @@ function SigninPage(props) {
         <Link to={"/auth/signup"}>회원가입</Link>
         <div>
             <Link>카카오로그인</Link>
-            <Link>구글로그인</Link>
+            <a href="http://localhost:8080/oauth2/authorization/google">구글로그인</a >
             <Link>네이버로그인</Link>
         </div>
     </>
