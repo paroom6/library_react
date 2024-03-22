@@ -20,7 +20,7 @@ function RootHeader(props) {
         setLogin(() => principalState.status === "success");
         console.log(principalState.status);
     },[principalState.status])
-
+    
     const handleOpenMenuClick = (e) => {
         e.stopPropagation();
         setShow(() => true);
@@ -34,7 +34,8 @@ function RootHeader(props) {
             config.headers.Authorization = null;
             return config;
         });
-        queryClient.refetchQueries("principalQuery");
+        queryClient.refetchQueries("principalQuery");   
+        window.location.replace("/auth/signin");
     }
     return (
         <div css={s.header}>
