@@ -12,6 +12,7 @@ import FullSizeLoader from '../components/FullSizeLoader/FullSizeLoader';
 import PageContainer from '../components/PageContainer/PageContainer';
 import MyPage from '../pages/MyPage/MyPage';
 import PasswordEditPage from '../pages/PasswordEditPage/PasswordEditPage';
+import BookManagement from '../pages/Admin/BookManagement/BookManagement';
 //useQuery: get 요청에 사용
 //첫번째 매개변수: 배열["key값", dependency] 
 //두번째 매개변수: 요청메서드(async, await)
@@ -49,7 +50,8 @@ function AuthRoute(props) {
                         <Route path="/auth/*" element={ <AuthPage />}/>
                         <Route path="/" element={ <Homepage/>}/>     
                         <Route path="/account/mypage" element={ <MyPage/>}/>     
-                        <Route path="/account/edit/password" element={ <PasswordEditPage/>}/>     
+                        <Route path="/account/edit/password" element={ <PasswordEditPage/> }/>   
+                        <Route path="/admin/book/management" element={ <BookManagement/> } /> 
                     </Routes>
                 }
             </PageContainer>
