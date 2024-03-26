@@ -56,7 +56,7 @@ function PasswordEditPage(props) {
             <h1>비밀번호 변경</h1>        
             <AuthPageInput type={"password"} value={oldPassword} onChange = {handleOldPassword} placeholder={"현재 비밀번호를 입력하세요"} Message={oldMessage}/>
             <AuthPageInput type={"password"} value={newPassword} onChange = {handleNewPassword} placeholder={"새로운 비밀번호를 입력하세요"} Message={newMessage}/>
-            <AuthPageInput type={"password"} value={newPasswordCheck} onChange = {handleNewPasswordCheck} placeholder={"새로운 비밀번호를 확인하세요"} Message={newCheck}/>
+            <AuthPageInput type={"password"} value={newPasswordCheck} onChange = {handleNewPasswordCheck} placeholder={"새로운 비밀번호를 확인하세요"} Message ={newCheck}/>
             <button onClick={handleEditSubmitClick}>비밀번호 변경하기</button>
         </div>
     );

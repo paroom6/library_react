@@ -12,12 +12,23 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import {v4 as uuid} from "uuid";
 import { Snapshot } from "recoil";
 import RightTopButton from "../../../components/RightTopButton/RightTopButton";
-import { registerBook } from "../../../apis/api/registerBook";
+import { registerBook } from "../../../apis/api/bookApi";
+import AdminBookSearch from "../../../components/AdminBookSearch/AdminBookSearch";
 const selectStyle = {
     control: (baseStyles) => ({
         ...baseStyles,
         borderRadius: "0px",
         border: "none",
+        outline: "none",
+        boxShadow: "none"
+    })
+}
+const selectStyle2 = {
+    control: (baseStyles) => ({
+        ...baseStyles,
+        borderRadius: "0px",
+        border: "none",
+        borderRight: "1px solid #dbdbdb",
         outline: "none",
         boxShadow: "none"
     })
@@ -130,8 +141,8 @@ function BookManagement(props) {
     }
     return (
         <div css={s.layout}>
-            <div>
-                <h1 css={s.header}>도서 관리</h1>
+            <div css={s.header}>
+                <h1 >도서 관리</h1>
                 <RightTopButton onClick={submit}>확인</RightTopButton>
             </div>
             <div css={s.topLayout}>
@@ -244,7 +255,11 @@ function BookManagement(props) {
                     </tbody>
                 </table>
             </div>
-            <div></div>
+                <AdminBookSearch 
+                    SelectStyle={selectStyle2}
+                    bookTypeOptions={bookTypesOption}
+                    categoryOptions={categoriesOption}
+                />
         </div>
     );
 }
