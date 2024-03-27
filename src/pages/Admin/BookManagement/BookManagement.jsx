@@ -2,7 +2,7 @@
 import Select from "react-select";
 import BookRegiserInout from "./BookRegiserInout/BookRegiserInout";
 import * as s from "./style";
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from "react-query";
 import { getAllBookTypeRequest, getAllCategoryRequest } from "../../../apis/api/options";
 import { CiSquarePlus } from "react-icons/ci";
@@ -10,10 +10,11 @@ import { useBookRegisterInput } from "../../../hooks/useBookRegisterInput";
 import { storage } from "../../../apis/filrebase/config/firebaseConfig";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import {v4 as uuid} from "uuid";
-import { Snapshot } from "recoil";
+import { Snapshot, useRecoilState, useSetRecoilState } from "recoil";
 import RightTopButton from "../../../components/RightTopButton/RightTopButton";
 import { registerBook } from "../../../apis/api/bookApi";
 import AdminBookSearch from "../../../components/AdminBookSearch/AdminBookSearch";
+import { selectedBookState } from "../../../atoms/adminSelectedBookAtom";
 const selectStyle = {
     control: (baseStyles) => ({
         ...baseStyles,
@@ -111,7 +112,17 @@ function BookManagement(props) {
     const authorName = useBookRegisterInput(nextInput, inputRef[6]);
     const publisherName = useBookRegisterInput(nextInput, inputRef[7]);
     const imgUrl = useBookRegisterInput(submit);
-
+    const [ selectedBook ] = useRecoilState(selectedBookState)
+    useEffect(() => {
+        bookId.setValue(() => selectedBook.bookId);
+        isbn.setValue(() => selectedBook.isbn);
+        bookTypeId.setValue(() => ({value: selectedBook.bookTypeId, label: selectedBook.bookTypeName}));
+        categoryId.setValue(() => ({value: selectedBook.categoryId, label: selectedBook.categoryName}));
+        bookName.setValue(() => selectedBook.bookName);
+        authorName.setValue(() => selectedBook.authorName);
+        publisherName.setValue(() => selectedBook.publisherName);
+        imgUrl.setValue(() => selectedBook.coverImgUrl);
+    },[selectedBook])
     
     
     const handlefileChange = (e) => {
@@ -183,7 +194,9 @@ function BookManagement(props) {
                                     options={bookTypesOption}
                                     onKeyDown={bookTypeId.handleOnKeyDown}
                                     onChange={bookTypeId.handleOnChange}
-                                    ref={inputRef[2]}   
+                                    ref={inputRef[2]}
+                                    value={bookTypeId.value.value}
+                                    inputValue={bookTypeId.value.label}
                                 />
                             </td>
                             <th css={s.registerTh}>카테고리</th>
@@ -193,6 +206,9 @@ function BookManagement(props) {
                                     onKeyDown={categoryId.handleOnKeyDown} 
                                     onChange={categoryId.handleOnChange}
                                     ref={inputRef[3]}
+                                    value={categoryId.value.value}
+                                    inputValue={categoryId.value.label}
+
                                 />
                             </td>
                         </tr>

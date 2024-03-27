@@ -21,7 +21,7 @@ export const searchButton = css`
         background-color: #eeeeee;
     }
 `
-export const tableLayer =css`
+export const tableLayout =css`
     position: relative;
     border: 1px solid #dbdbdb;
     height: 160px;
@@ -47,10 +47,14 @@ export const table =css`
     width: max-content;
     & td, & th {
         border: 1px solid #dbdbdb;
+        padding: 0px 5px;
     }
     & th {
         border-top: none;
     } 
+    & td {
+        font-size: 14px;
+    }
     & tr > td:nth-of-type(1),
     & tr > th:nth-of-type(1) {
         border-left: none;
@@ -62,34 +66,41 @@ export const table =css`
     & tr > td:nth-of-type(1),
     & tr > th:nth-of-type(1) {
         text-align: center;
-        width: 30px;
+        min-width: 30px;
     }
     & tr > td:nth-of-type(2),
     & tr > th:nth-of-type(2) {
-        width: 80px;
+        min-width: 80px;
+    }
+    & tr > td:nth-of-type(2) {
+        text-align: right;
     }
     & tr > td:nth-of-type(3),
     & tr > th:nth-of-type(3) {
-        width: 250px;
+        min-width: 250px;
     }
     & tr > td:nth-of-type(4),
     & tr > th:nth-of-type(4) {
-        width: 150px;
+        min-width: 150px;
     }
     & tr > td:nth-of-type(5),
     & tr > th:nth-of-type(5) {
-        width: 150px;
+        min-width: 150px;
     }
     & tr > td:nth-of-type(6),
     & tr > th:nth-of-type(6) {
-        width: 150px;
+        min-width: 150px;
     }
     & tr > td:nth-of-type(7),
     & tr > th:nth-of-type(7) {
-        width: 100px;
+        min-width: 100px;
     }
     & tr > td:nth-of-type(8),
     & tr > th:nth-of-type(8) {
+        width: 100px;
+    }
+    & tr > td:nth-of-type(9),
+    & tr > th:nth-of-type(9) {
         width: 100px;
     }
     
