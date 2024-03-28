@@ -7,7 +7,7 @@ export function useBookRegisterInput(enterFn, ref) {
             setValue(() => e.target.value);
         } else {
             console.log(e);
-            setValue(() => e.value);
+            setValue(() => e);
         }
     }
 

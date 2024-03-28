@@ -9,10 +9,13 @@ const inputBox = css`
     padding: 0px 10px;
     width: 100%;
     height: 100%;
+    &:disabled{
+        background-color: white;
+    }
 `
 
 
-function BookRegiserInout({value, bookRef, onChange, onKeyDown}) {
+function BookRegiserInout({value, bookRef, onChange, onKeyDown, isDisable}) {
     return (
         <>
         <input 
@@ -22,6 +25,7 @@ function BookRegiserInout({value, bookRef, onChange, onKeyDown}) {
             onChange={onChange}
             onKeyDown={onKeyDown}
             ref={bookRef}
+            disabled={isDisable}
          />
         </>
     );

@@ -60,7 +60,7 @@ export const imageBox = css`
     width: 150px;
     height: 100%;
     overflow: hidden;
-
+    
     & img {
         height: 150px;
     }
